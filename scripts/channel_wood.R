@@ -10,6 +10,7 @@ library(icenReg)
 library(dplyr)
 
 # ----- comments from Carina to test commits
+# ----- attempt to edit actual channel_wood file and push changes to github
 
 
 # Read and wrangle data --------------------------------------------------------
