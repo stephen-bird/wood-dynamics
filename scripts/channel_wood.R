@@ -9,6 +9,8 @@ library(zoo)
 library(icenReg)
 library(dplyr)
 
+# ----- comments from Carina to test commits
+
 
 # Read and wrangle data --------------------------------------------------------
 
