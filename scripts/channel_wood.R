@@ -12,6 +12,8 @@ library(dplyr)
 # ----- comments from Carina to test commits
 # ----- attempt to edit actual channel_wood file and push changes to github
 
+# ------ Dave comments to test:
+        # "I should have learned this properly the first time"
 
 # Read and wrangle data --------------------------------------------------------
 
