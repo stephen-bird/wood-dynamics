@@ -9,6 +9,15 @@ library(zoo)
 library(icenReg)
 library(dplyr)
 
+<<<<<<< HEAD
+=======
+# ----- comments from Carina to test commits
+# ----- attempt to edit actual channel_wood file and push changes to github
+
+# ------ Dave comments to test:
+        # "I should have learned this properly the first time"
+
+>>>>>>> 8e505ac8e085772147cd0cf677516cf8c8437eb7
 # Read and wrangle data --------------------------------------------------------
 
 # Start with the file with the data from the upper reaches:
