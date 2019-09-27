@@ -97,7 +97,7 @@ bankErosion_input_nh<- function(ints_nh.df, V_cwd, E_Vb, Pf_be, B, t1, t2, LVLSP
         
         # annual input from bank erosion from all polygons
         I_bet <- sum(LVLSP*ints_nh.df$x*Pf_be*E_Vb*B, na.rm = TRUE) + 
-                 sum(V_cwd*ints_nh.df$x*Pf_be*E_Vb*B, na.rm = TRUE) 
+                 sum(V_cwd*ints_nh.df$x*B, na.rm = TRUE) 
         I_bet <- rep(I_bet , t2-t1+1) # repeat annual input from start to end time
         
         # store the results
@@ -118,7 +118,7 @@ bankErosion_input_h<- function(ints_h.df, E_Vb_tips, Pf_be, B, tipsy){
         tipsy$x <- x$x[match(tipsy$ID, x$FULL_LABEL)] # add stream lengths/cutblock to dataframe
         
         # annual input from bank erosion from harvested polygon
-        tipsy$I_bet_h <- sum((tipsy$x*tipsy$Vs*Pf_be*E_Vb_tips*B), (tipsy$x*tipsy$CWD*Pf_be*E_Vb_tips*B), na.rm = TRUE)
+        tipsy$I_bet_h <- sum((tipsy$x*tipsy$Vs*Pf_be*E_Vb_tips*B), (tipsy$x*tipsy$CWD*B), na.rm = TRUE)
         I_bet_h <- aggregate(I_bet_h ~ Year, data=tipsy, FUN=sum) 
         
         return(I_bet_h)
@@ -158,7 +158,7 @@ mortality_input_h<- function(ints_h.df, E_Vb_tips, t1, t2, LVLSP, tipsy){
         tipsy$x <- x$x[match(tipsy$ID, x$FULL_LABEL)] # add stream lengths/cutblock to dataframe
         
         # calculate annual input from mortality
-        I_m <- (tipsy$x*tipsy$Vs*tipsy$Pf*E_Vb_tips*B) + (tipsy$x*tipsy$CWD*tipsy$Pf*E_Vb_tips*B)
+        I_m <- (tipsy$x*tipsy$Vs*tipsy$Pf*E_Vb_tips) 
         
         # store the results
         I_m <- data.frame(cbind(seq(t1, t2, by=1), I_m))
