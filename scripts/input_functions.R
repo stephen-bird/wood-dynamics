@@ -1,11 +1,12 @@
 # Fuctions for calculating the large wood input to the channel.
-# There are 5 functions needed to do this:
+# There are 6 functions needed to do this:
 
 # ev2_rnd  -- calculates the expected volume of a log long enough to span the channel banks given a random tree fall anlgle
 # landslide_input -- returns the volumne of wood inputted to the channel by year from landslides
 # bankErosion_input_nh -- returns the volumne of wood inputted to the channel by year bank erosion in non harvest areas
 # bankErosion_input_h --  returns the volumne of wood inputted to the channel by year from bank erosion in non harvest areas
-# mortality_input_nh -- returns the volume of wood inputted to the channel by year from mortality
+# mortality_input_nh -- returns the volume of wood inputted to the channel by year from mortality in non harvested areas
+# mortality_input_h -- returns the volume of wood inputted to the channel by year from mortality in harvested areas
 
 
 # by Carina Helm and Stephen Bird
