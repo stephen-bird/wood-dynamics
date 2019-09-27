@@ -2,10 +2,10 @@
 # There are 5 functions needed to do this:
 
 # ev2_rnd  -- calculates the expected volume of a log long enough to span the channel banks given a random tree fall anlgle
-# landslide_input -- returns the volumne of wood inputted to the channel by year for from landslides
-# bankErosion_input_nh_sp1 -- returns the volumne of wood inputted to the channel by year for from bank erosion in non harvest areas
-# bankErosion_input_h_sp1 --  returns the volumne of wood inputted to the channel by year for from bank erosion in non harvest areas
-# mortality_input_nh_sp1 -- returns the volume of wood inputted to the channel by year from mortality
+# landslide_input -- returns the volumne of wood inputted to the channel by year from landslides
+# bankErosion_input_nh -- returns the volumne of wood inputted to the channel by year bank erosion in non harvest areas
+# bankErosion_input_h --  returns the volumne of wood inputted to the channel by year from bank erosion in non harvest areas
+# mortality_input_nh -- returns the volume of wood inputted to the channel by year from mortality
 
 
 # by Carina Helm and Stephen Bird
@@ -71,7 +71,7 @@ ev2_rnd <- function(h,z,rd,w,hd=1.3){
 # landslide_input - function that returns the volume of wood inputted to the channel by year (I_ms)
 landslide_input <- function(slides, V_cwd){
         
-        # Inputs include: slides = slides shapefile; VRI =  VRI shapefile; 
+        # Inputs include: slides = slides shapefile
         # V_cwd = volume of CWD in forest (tipsy estimate)
         
         slides <- slides %>%  # area in m2 of the slides
@@ -84,13 +84,13 @@ landslide_input <- function(slides, V_cwd){
 }
 
 # Note - this equation doesn't depend on species level tree characterstics, so a lumped estimate
-# for volume can be used. 
+# for volume was be used (aka LVLTOT_125 column from the VRI dataframe as opposed to LVLSP1,LVLSP2 etc..
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # bankErosion_input_nh - function returns vol. of wood input to the channel by year through bank erosion for non-harvested polys (I_b)
 bankErosion_input_nh<- function(ints_nh.df, V_cwd, E_Vb, Pf_be, B, t1, t2, LVLSP){
         
-        # VRI_int.df = data, V_cwd = tipsy coarse wood est.; Pf_be = 1;, 
+        # VRI_int.df = VRI df, V_cwd = tipsy coarse wood est.; Pf_be = prob of tree fall (set to 1);, 
         # B = bank erosion rate; t1 = start of study period, t2 = end of study period,
         # E_vb = expected volume from a single tree-fall event
         # LVLSP = df of vol/ha of top two leading species
@@ -111,8 +111,8 @@ bankErosion_input_nh<- function(ints_nh.df, V_cwd, E_Vb, Pf_be, B, t1, t2, LVLSP
 # bankErosion_input_h - function returns vol. of wood input to the channel through bank erosion by year for harvested polys (I_b)
 bankErosion_input_h<- function(ints_h.df, E_Vb_tips, Pf_be, B, tipsy){
         
-        # VRI = VRI sf, E_vb_tips = estimate volume from tipsy data; Pf_be = 1;, 
-        # B = bank erosion rate; tipsy = df of forest characteristics for harvested area
+        # VRI = VRI sf, E_vb_tips = expected volume from a single tree-fall event from tipsy data;
+        # Pf_be = 1; B = bank erosion rate; tipsy = df of forest characteristics for harvested area
         
         x <- aggregate(x ~ FULL_LABEL, data=ints_h.df, FUN=sum) # sum length of stream in cutblock
         tipsy$x <- x$x[match(tipsy$ID, x$FULL_LABEL)] # add stream lengths/cutblock to dataframe
@@ -128,8 +128,8 @@ bankErosion_input_h<- function(ints_h.df, E_Vb_tips, Pf_be, B, tipsy){
 # mortality_input_nh- function returns vol. of wood input to the channel by year for non-harvested polys (I_m)
 mortality_input_nh <- function(ints_nh.df, V_cwd, E_Vb, t1, t2, Pf, LVLSP){
         
-        # ints_nh.df = VRI df; V_cwd = cwd estimate;  E_vb = see above; 
-        # Pf = probability of a tree falling during ti to ti+1; tw = start time, t2 = end time
+        # ints_nh.df = VRI df; V_cwd = cwd estimate;  E_vb = expected volume from a single tree-fall event; 
+        # Pf = probability of a tree falling during ti to ti+1; t1 = start time, t2 = end time
         # B = bank erosion rate; tipsy = df of forest characteristics for harvested area
         # LVLSP = df of vol/ha of top two leading species
         
@@ -146,7 +146,7 @@ mortality_input_nh <- function(ints_nh.df, V_cwd, E_Vb, t1, t2, Pf, LVLSP){
 }
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# mortality_input_nh_sp2- function returns vol. of wood input to the channel by year for non-harvested polys (I_b)
+# mortality_input_h- function returns vol. of wood input to the channel by year for non-harvested polys (I_b)
 mortality_input_h<- function(ints_h.df, E_Vb_tips, t1, t2, LVLSP, tipsy){
         
         # ints_nh.df = VRI df; V_cwd = cwd estimate;  E_vb_tips = estimate volume from tipsy data
