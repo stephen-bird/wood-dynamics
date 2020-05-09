@@ -85,7 +85,7 @@ landslide_input <- function(slides, V_cwd){
 }
 
 # Note - this equation doesn't depend on species level tree characterstics, so a lumped estimate
-# for volume was be used (aka LVLTOT_125 column from the VRI dataframe as opposed to LVLSP1,LVLSP2 etc..
+# for volume was be used (aka LVLTOT_125 column from the VRI dataframe as opposed to LVLSP1,LVLSP2 etc...
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # bankErosion_input_nh - function returns vol. of wood input to the channel by year through bank erosion for non-harvested polys (I_b)
